@@ -1,0 +1,9 @@
+{
+  "name": "albert",
+  "main": "index.html",
+  "window": {
+    "toolbar": false,
+    "frame": false,
+    "transparent": true
+  }
+}
