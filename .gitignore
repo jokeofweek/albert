@@ -14,5 +14,5 @@ results
 build
 .grunt
 
-node_module
+node_modules/*
 node-webkit/?*.*
