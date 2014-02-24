@@ -10,5 +10,9 @@
     "type": "git",
     "url": "git://github.com/jokeofweek/albert.git"
   },
-  "author": "Dominic Charley-Roy (@jokeofweek)"
+  "author": "Dominic Charley-Roy (@jokeofweek)",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-run": "~0.2.1"
+  }
 }
