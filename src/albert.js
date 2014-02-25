@@ -61,7 +61,9 @@ Albert.changeTheme = function(newTheme) {
   // Ensure the theme exists.
   var themePath = path.join(Albert.THEMES_PATH, newTheme, 'theme.css');
   if (fs.existsSync(themePath)) {
-    // Create the new theme element
+    // Create the new theme element. We have to copy the text from the CSS file
+    // as creating a new link element and adding a link to another file does 
+    // not seem to be allowed.
     var newThemeElement = document.createElement('style');
     newThemeElement.appendChild(document.createTextNode(fs.readFileSync(themePath)));
     newThemeElement.id = 'theme-css';
