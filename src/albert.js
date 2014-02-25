@@ -12,9 +12,10 @@ Albert.THEMES_PATH = path.join(Albert.DATA_PATH, 'Themes');
 
 /**
  * Performs any initial Albert setup.
- * @param  {document} document The DOM.
  */
 Albert.start = function() {
+  // Cache the DOM.
+  Albert.document = document;
   // Ensure the Albert root path exists.
   if (!fs.existsSync(Albert.DATA_PATH)) fs.mkdirSync(Albert.DATA_PATH);
   // Load plugins
