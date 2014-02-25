@@ -4,6 +4,8 @@
   "window": {
     "toolbar": false,
     "frame": false,
-    "transparent": true
+    "transparent": true,
+    "resizable": false,
+    "width": 600
   }
 }

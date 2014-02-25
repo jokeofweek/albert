@@ -6,6 +6,7 @@ var fs = require('fs');
 var path = require('path');
 
 // Setup the Albert root object.
+Albert.WIDTH = 600;
 Albert.DATA_PATH = path.join(process.env.APPDATA, 'Albert');
 Albert.PLUGINS_PATH = path.join(Albert.DATA_PATH, 'Plugins');
 Albert.THEMES_PATH = path.join(Albert.DATA_PATH, 'Themes');
@@ -16,10 +17,20 @@ Albert.THEMES_PATH = path.join(Albert.DATA_PATH, 'Themes');
 Albert.start = function() {
   // Cache the DOM.
   Albert.document = document;
+  // Cache some elements
+  Albert.appContainer = document.querySelector('#app-container');
+  Albert.searchBox = document.querySelector('#search-box');
+  Albert.resultList = document.querySelector('#result-list');
   // Ensure the Albert root path exists.
   if (!fs.existsSync(Albert.DATA_PATH)) fs.mkdirSync(Albert.DATA_PATH);
   // Load plugins
   Albert.reloadPlugins();
+  // Setup the event listeners
+  Albert.searchBox.addEventListener('input', function() {
+    Albert.updateSearch(this.value);
+  }, false);
+  // Initial root search
+  Albert.updateSearch('');
 };
 
 /**
@@ -74,6 +85,29 @@ Albert.changeTheme = function(newTheme) {
   } else {
     return false;
   }
+};
+
+Albert.updateSearch = function(query) {
+  var results = ['A', 'B', 'C'];
+  var matchingResults = results.filter(function(val){
+    return val.indexOf(query) != -1;
+  });
+
+  // Create the document fragment
+  var fragment = Albert.document.createDocumentFragment();
+  for (var i = 0; i < matchingResults.length; i++) {
+    var item = Albert.document.createElement('li');
+    item.className = 'result';
+    item.appendChild(Albert.document.createTextNode(matchingResults[i]));
+    fragment.appendChild(item);
+  }
+
+  // Update the list
+  Albert.resultList.innerHTML = '';
+  Albert.resultList.appendChild(fragment);
+
+  // Resize the window
+  window.resizeTo(Albert.WIDTH, Albert.appContainer.offsetHeight);
 };
 
 // Start Albert!
